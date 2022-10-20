@@ -32,25 +32,27 @@ CREATE TABLE `product` (
   `id_announcement_image` int(11) NOT NULL,
   `title` varchar(80) NOT NULL,
   `price` decimal(8,2) NOT NULL,
-  `price_WOdiscount` decimal(8,2) DEFAULT NULL,
+  `price_without_discount` decimal(8,2) DEFAULT NULL,
   `price_promocode` decimal(8,2) DEFAULT NULL,
-  `description` text NOT NULL
+  `description` text NOT NULL,
+  `active` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `product` (`id`, `id_main_section`, `id_announcement_image`, `title`, `price`, `price_WOdiscount`, `price_promocode`, `description`) VALUES
-(1, 1, 1, 'product1', '100.00', '120.00', '90.00', 'descr1'),
-(2, 1, 2, 'product2', '999.00', '1200.00', '900.00', 'descr2'),
-(3, 1, 3, 'product3', '200.00', '210.00', '199.00', 'descr3'),
-(4, 1, 4, 'product4', '300.00', '333.00', '150.00', 'descr4'),
-(5, 1, 5, 'product5', '100.00', '120.00', '90.00', 'descr5'),
-(6, 1, 6, 'product6', '999.00', '1200.00', '900.00', 'descr6'),
-(7, 1, 7, 'product7', '200.00', '210.00', '199.00', 'descr7'),
-(8, 2, 8, 'product8', '300.00', '333.00', '150.00', 'descr8'),
-(9, 2, 5, 'product9', '100.00', '120.00', '90.00', 'descr9'),
-(10, 2, 6, 'product10', '999.00', '1200.00', '900.00', 'descr10'),
-(11, 2, 7, 'product11', '200.00', '210.00', '199.00', 'descr11'),
-(12, 2, 8, 'product12', '300.00', '333.00', '150.00', 'descr12'),
-(13, 2, 3, 'product13', '200.00', '210.00', '199.00', 'descr13');
+INSERT INTO `product` (`id`, `id_main_section`, `id_announcement_image`, `title`, `price`, `price_without_discount`, `price_promocode`, `description`, `active`) VALUES
+(1, 1, 1, 'product1', '100.00', '120.00', '90.00', 'descr1', 1),
+(2, 1, 2, 'product2', '999.00', '1200.00', '900.00', 'descr2', 1),
+(3, 1, 3, 'product3', '200.00', '210.00', '199.00', 'descr3', 1),
+(4, 1, 4, 'product4', '300.00', '333.00', '150.00', 'descr4', 1),
+(5, 1, 5, 'product5', '100.00', '120.00', '90.00', 'descr5', 1),
+(6, 1, 6, 'product6', '999.00', '1200.00', '900.00', 'descr6', 1),
+(7, 1, 7, 'product7', '200.00', '210.00', '199.00', 'descr7', 1),
+(8, 2, 8, 'product8', '300.00', '333.00', '150.00', 'descr8', 1),
+(9, 2, 5, 'product9', '100.00', '120.00', '90.00', 'descr9', 1),
+(10, 2, 6, 'product10', '999.00', '1200.00', '900.00', 'descr10', 1),
+(11, 2, 7, 'product11', '200.00', '210.00', '199.00', 'descr11', 1),
+(12, 2, 8, 'product12', '300.00', '333.00', '150.00', 'descr12', 1),
+(13, 2, 3, 'product13', '200.00', '210.00', '199.00', 'descr13', 1),
+(14, 2, 4, 'product14', '999.00', '1200.00', '900.00', 'descr14', 0);
 
 CREATE TABLE `product_image` (
   `id_product` int(11) NOT NULL,
@@ -65,9 +67,11 @@ INSERT INTO `product_image` (`id_product`, `id_image`) VALUES
 (13, 3),
 (1, 4),
 (4, 4),
+(14, 4),
 (5, 5),
 (9, 5),
 (12, 5),
+(14, 5),
 (6, 6),
 (10, 6),
 (11, 6),
