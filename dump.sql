@@ -115,7 +115,8 @@ INSERT INTO `section_product` (`id_section`, `id_product`) VALUES
 (2, 10),
 (2, 11),
 (2, 12),
-(2, 13);
+(2, 13),
+(2, 14);
 
 
 ALTER TABLE `image`
