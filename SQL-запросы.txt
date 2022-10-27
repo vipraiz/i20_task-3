@@ -47,7 +47,7 @@ FROM product p
 JOIN category c ON c.id=p.id_main_category
 WHERE p.id=1
 
-SELECT c.title FROM product p
+SELECT c.id, c.title FROM product p
 JOIN category_product cp ON cp.id_product=p.id
 JOIN category c ON c.id=cp.id_category
 WHERE p.id=1
