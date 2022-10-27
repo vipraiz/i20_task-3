@@ -1,0 +1,68 @@
+Общий список категорий:
+Получить id, название и количество активных товаров всех категорий (если активных товаров нет, тогда информация о категории не войдёт в результирующую выборку):
+
+SELECT c.id, c.title, COUNT(*) AS quantity
+FROM product p
+LEFT JOIN category_product cp ON cp.id_product=p.id
+JOIN category c ON c.id=p.id_main_category OR c.id=cp.id_category
+WHERE p.active = 1
+GROUP BY c.id
+ORDER BY quantity DESC
+
+
+
+Товары конкретной категории:
+Получить название, описание и количество активных товаров категории:
+
+SELECT title, description, COUNT(pid) AS total_active FROM 
+(SELECT c.title, c.description, p.id AS pid
+FROM category c
+LEFT JOIN product p
+ON p.id_main_category=c.id AND p.active=1
+WHERE c.id=1
+UNION ALL
+SELECT c.title, c.description, p.id
+FROM category c
+JOIN category_product cp ON cp.id_category=c.id
+JOIN product p
+ON p.id=cp.id_product AND p.active=1
+WHERE c.id=1) t
+GROUP BY t.title, t.description
+
+
+Получить необходимую информацию о 12 товарах для вывода на странице категории:
+
+SELECT p.id, p.title, p.id_main_category,
+c.title AS title_main_category, i.src, i.alt
+FROM product p
+LEFT JOIN category_product cp ON cp.id_product=p.id
+JOIN category c ON c.id=p.id_main_category OR c.id=cp.id_category
+JOIN image i ON i.id=p.id_announcement_image
+WHERE c.id = 1 AND p.active = 1
+ORDER BY p.title
+LIMIT 12
+OFFSET 0
+
+
+
+Страница товара:
+Получить полную информацию о товаре
+
+SELECT p.id, p.title, p.price, 
+p.price_without_discount, p.price_promocode, p.description, 
+p.active, p.id_main_category, c.title
+FROM product p
+JOIN category c ON c.id=p.id_main_category
+WHERE p.id=1
+
+SELECT c.title FROM product p
+JOIN category_product cp ON cp.id_product=p.id
+JOIN category c ON c.id=cp.id_category
+WHERE p.id=1
+ORDER BY c.title
+
+SELECT i.src, i.alt FROM image i
+JOIN product_image pi ON pi.id_image=i.id
+JOIN product p ON p.id=pi.id_product
+WHERE p.id=1
+ORDER BY i.src
