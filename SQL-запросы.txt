@@ -58,3 +58,34 @@ JOIN product_image pi ON pi.id_image=i.id
 JOIN product p ON p.id=pi.id_product
 WHERE p.id=1
 ORDER BY i.src
+
+
+
+Дополнительные запросы
+Составить sql запрос, который выведет все категории, даже с количеством товаров 0, но с указанием количества товара для каждой категории, как и в оригинальном задании:
+
+SELECT id, title, COUNT(pid) AS quantity FROM 
+(SELECT c.id, c.title, p.id AS pid
+FROM category c
+LEFT JOIN product p
+ON p.id_main_category=c.id AND p.active=1
+UNION ALL
+SELECT c.id, c.title, p.id
+FROM category c
+JOIN category_product cp ON cp.id_category=c.id
+JOIN product p
+ON p.id=cp.id_product AND p.active=1) t
+GROUP BY t.id, t.title
+ORDER BY quantity DESC
+ 
+
+Составить sql запрос, который выведет все категории товаров с указанием количество товаров, имеющих количество товаров больше либо равно 2:
+
+SELECT c.id, c.title, COUNT(*) AS quantity
+FROM product p
+LEFT JOIN category_product cp ON cp.id_product=p.id
+JOIN category c ON c.id=p.id_main_category OR c.id=cp.id_category
+WHERE p.active = 1
+GROUP BY c.id
+HAVING quantity >= 2
+ORDER BY quantity DESC
