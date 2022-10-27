@@ -28,9 +28,9 @@ SELECT p.id, p.title, p.id_main_category,
 c.title AS title_main_category, i.src, i.alt
 FROM product p
 LEFT JOIN category_product cp ON cp.id_product=p.id
-JOIN category c ON c.id=p.id_main_category OR c.id=cp.id_category
+LEFT JOIN category c ON c.id=p.id_main_category
 JOIN image i ON i.id=p.id_announcement_image
-WHERE c.id = 1 AND p.active = 1
+WHERE 1 IN (cp.id_category, p.id_main_category) AND p.active = 1
 ORDER BY p.title
 LIMIT 12
 OFFSET 0
