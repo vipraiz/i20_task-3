@@ -1,0 +1,7 @@
+DirectoryIndex /products.php
+AddDefaultCharset utf-8
+ErrorDocument 404 /404.html
+
+RewriteEngine on
+Options +FollowSymlinks -MultiViews
+RewriteRule ^$ /products.php [R,L]
