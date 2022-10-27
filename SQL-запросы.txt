@@ -14,20 +14,12 @@ ORDER BY quantity DESC
 Товары конкретной категории:
 Получить название, описание и количество активных товаров категории:
 
-SELECT title, description, COUNT(pid) AS total_active FROM 
-(SELECT c.title, c.description, p.id AS pid
+SELECT c.title, c.description, COUNT(DISTINCT p.id) AS total_active
 FROM category c
-LEFT JOIN product p
-ON p.id_main_category=c.id AND p.active=1
-WHERE c.id=1
-UNION ALL
-SELECT c.title, c.description, p.id
-FROM category c
-JOIN category_product cp ON cp.id_category=c.id
-JOIN product p
-ON p.id=cp.id_product AND p.active=1
-WHERE c.id=1) t
-GROUP BY t.title, t.description
+LEFT JOIN category_product cp ON cp.id_category=c.id
+LEFT JOIN product p ON (p.id_main_category=c.id OR p.id=cp.id_product) AND p.active = 1
+WHERE c.id = 1
+GROUP BY c.id
 
 
 Получить необходимую информацию о 12 товарах для вывода на странице категории:
