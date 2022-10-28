@@ -15,3 +15,5 @@ $opt = [
 $pdo = new PDO($dsn, $username, $password, $opt);
 
 $productsPerPage = 12;
+
+CONST INTMAXSIZE = 0x7FFFFFFF;

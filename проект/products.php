@@ -138,6 +138,9 @@ if ($page < $totalPages) {
 }
 ?>
       </section>
+      <div class="feedback">
+        <a href="feedback.php" class="regular-link feedback-link">Обратная связь</a>
+      </div>
     </div>
   </main>
 </body>

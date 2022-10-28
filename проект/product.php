@@ -167,10 +167,10 @@ if (!$product['active']) {
         </div>
       </section>
     </div>
-    <script src="js/vendor/jquery-3.6.1.min.js"></script>
-    <script src="js/vendor/toastr.min.js"></script>
-    <script src="js/script.js"></script>
   </main>
+  <script src="js/vendor/jquery-3.6.1.min.js"></script>
+  <script src="js/vendor/toastr.min.js"></script>
+  <script src="js/script.js"></script>
 </body>
 
 </html>

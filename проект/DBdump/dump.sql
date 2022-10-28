@@ -122,6 +122,16 @@ INSERT INTO `product_image` (`id_product`, `id_image`) VALUES
 (16, 16),
 (21, 21);
 
+CREATE TABLE `feedback` (
+  `id` int(11) NOT NULL,
+  `name` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(319) COLLATE utf8_unicode_ci NOT NULL,
+  `birthyear` smallint(4) NOT NULL,
+  `sex` tinyint(4) NOT NULL,
+  `subject` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `question` varchar(4000) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
 
@@ -141,6 +151,9 @@ ALTER TABLE `product_image`
   ADD PRIMARY KEY (`id_product`,`id_image`),
   ADD KEY `product_image_ibfk_2` (`id_image`);
 
+ALTER TABLE `feedback`
+  ADD PRIMARY KEY (`id`);
+
 
 ALTER TABLE `category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
@@ -150,6 +163,9 @@ ALTER TABLE `image`
 
 ALTER TABLE `product`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+ALTER TABLE `feedback`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 
 ALTER TABLE `category_product`

@@ -1,4 +1,12 @@
 <?php
+function clearStr($data) {
+    return trim(strip_tags($data));
+}
+
+function clearInt($data) {
+    return abs((int)$data);
+}
+
 function getURLWithNewGetParametr($name, $value)
 {
     $params = array_merge($_GET, array($name => $value));
@@ -99,4 +107,16 @@ function getFullInfoAboutProduct($pdo, $id)
     $product['price_promocode'] = getNormalPrice($product['price_promocode']);
 
     return $product;
+}
+
+function sendFeedback($pdo, $name, $email, $birthyear, $sex, $subject, $question)
+{
+    $sql = 'INSERT INTO feedback (name, email, birthyear, sex, subject, question)
+            VALUES (:name, :email, :birthyear, :sex, :subject, :question)';
+    $stmt = $pdo->prepare($sql);
+    return $stmt->execute([
+        'name' => $name, 'email' => $email,
+        'birthyear' => $birthyear, 'sex' => $sex,
+        'subject' => $subject, 'question' => $question,
+    ]);
 }
