@@ -1,10 +1,7 @@
 <?php
-function clearStr($data) {
-    return trim(strip_tags($data));
-}
-
-function clearInt($data) {
-    return abs((int)$data);
+function clearStr($data)
+{
+    return trim(htmlspecialchars($data));
 }
 
 function getURLWithNewGetParametr($name, $value)

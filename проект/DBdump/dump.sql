@@ -128,8 +128,8 @@ CREATE TABLE `feedback` (
   `email` varchar(319) COLLATE utf8_unicode_ci NOT NULL,
   `birthyear` smallint(4) NOT NULL,
   `sex` tinyint(4) NOT NULL,
-  `subject` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `question` varchar(4000) COLLATE utf8_unicode_ci NOT NULL
+  `subject` varchar(600) COLLATE utf8_unicode_ci NOT NULL,
+  `question` varchar(12000) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 ALTER TABLE `category`

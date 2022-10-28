@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $name = clearStr($_POST['name']);
     $email = clearStr($_POST['email']);
-    $birthyear = clearInt($_POST['birthyear']);
+    $birthyear = (int) $_POST['birthyear'];
     $sex = $_POST['sex'];
     $subject = clearStr($_POST['subject']);
     $question = clearStr($_POST['question']);
@@ -59,14 +59,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $errors = [];
     if (!addErrorMessageIfEmpty($name, 'name', $errors)) {
-        if (mb_strlen($name) > $maxLengthName) {
+        if (mb_strlen($_POST['name']) > $maxLengthName) {
             $errors['name'] = getErrorMessageBlock("Количество символов не должно превышать $maxLengthName");
         } elseif (!preg_match($patternName, $name)) {
             $errors['name'] = getErrorMessageBlock('Имя должно содержать только буквы русского алфавита<br>(без пробелов и знаков препинания)');
         }
     }
     if (!addErrorMessageIfEmpty($email, 'email', $errors)) {
-        if (strlen($email) > $maxLengthEmail) {
+        if (strlen($_POST['email']) > $maxLengthEmail) {
             $errors['email'] = getErrorMessageBlock("Количество символов не должно превышать $maxLengthEmail");
         } elseif (!preg_match($patternEmail, $email)) {
             $errors['email'] = getErrorMessageBlock('Введите корректный адрес эллектронной почты');
@@ -81,11 +81,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errors['sex'] = getErrorMessageBlock('Пол указан неверно');
     }
     if (!addErrorMessageIfEmpty($subject, 'subject', $errors)
-        && mb_strlen($subject) > $maxLengthSubject) {
+        && mb_strlen($_POST['subject']) > $maxLengthSubject) {
         $errors['subject'] = getErrorMessageBlock("Количество символов не должно превышать $maxLengthSubject");
     }
     if (!addErrorMessageIfEmpty($question, 'question', $errors)
-        && mb_strlen($question) > $maxLengthQuestion) {
+        && mb_strlen($_POST['question']) > $maxLengthQuestion) {
         $errors['question'] = getErrorMessageBlock("Количество символов не должно превышать $maxLengthQuestion");
     }
     addErrorMessageIfEmpty($contractIsRead, 'contract_is_read', $errors);
