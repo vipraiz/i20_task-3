@@ -3,7 +3,7 @@ require_once 'inc/config.inc.php';
 require_once 'inc/lib.inc.php';
 
 $successMessage = '';
-if ($_GET['mes'] == 'success') {
+if (isset($_GET['mes']) && $_GET['mes'] == 'success') {
     $successMessage = '<div class="auth-form__success-message">Данные успешно сохранены!</div>';
 }
 
@@ -130,19 +130,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="auth-form__groups">
               <div class="auth-form__group">
                 <label class="auth-form__label" for="name">ИМЯ</label>
-                <input class="auth-form__input<?=$errors['name'] ? ' auth-form__input-error' : ''?>"
+                <input class="auth-form__input<?=isset($errors['name']) ? ' auth-form__input-error' : ''?>"
                   type="text" name="name" id="name" value="<?=$name?>" required>
-                <?=$errors['name']?>
+                <?=isset($errors['name']) ? $errors['name'] : ''?>
               </div>
               <div class="auth-form__group">
                 <label class="auth-form__label" for="email">E-MAIL</label>
-                <input class="auth-form__input<?=$errors['email'] ? ' auth-form__input-error' : ''?>"
+                <input class="auth-form__input<?=isset($errors['email']) ? ' auth-form__input-error' : ''?>"
                   type="email" name="email" id="email" value="<?=$email?>" required>
-                <?=$errors['email']?>
+                <?=isset($errors['email']) ? $errors['email'] : ''?>
               </div>
               <div class="auth-form__group">
                 <label class="auth-form__label" for="birthyear">ГОД РОЖДЕНИЯ:</label>
-                <select class="auth-form__select<?=$errors['birthyear'] ? ' auth-form__input-error' : ''?>"
+                <select class="auth-form__select<?=isset($errors['birthyear']) ? ' auth-form__input-error' : ''?>"
                   name="birthyear" id="birthyear" required>
                   <option value="" hidden>год</option>
 <?php for ($year = $thisYear; $year >= $lowestAllowableYear; $year--): ?>
@@ -151,7 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                   </option>
 <?php endfor;?>
                 </select>
-                <?=$errors['birthyear']?>
+                <?=isset($errors['birthyear']) ? $errors['birthyear'] : ''?>
               </div>
               <div class="auth-form__group">
                 ПОЛ:
@@ -161,29 +161,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <input class="auth-form__input-radio" type="radio" name="sex" id="radio-female"
                   value="female" required  <?=$sex == 'female' ? 'checked' : ''?>>
                 <label class="auth-form__label" for="radio-female">ЖЕНСКИЙ</label>
-                <?=$errors['sex']?>
+                <?=isset($errors['sex']) ? $errors['sex'] : ''?>
               </div>
               <div class="auth-form__group">
                 <label class="auth-form__label" for="subject">ТЕМА ОБРАЩЕНИЯ</label>
-                <input class="auth-form__input<?=$errors['subject'] ? ' auth-form__input-error' : ''?>"
-                  type="text" name="subject" id="subject" value="<?=$subject?>" required>
-                <?=$errors['subject']?>
+                <input class="auth-form__input<?=isset($errors['subject']) ? ' auth-form__input-error' : ''?>"
+                  type="text" name="subject" id="subject" value="<?=$subject?>" autocomplete="off" required>
+                <?=isset($errors['subject']) ? $errors['subject'] : ''?>
               </div>
               <div class="auth-form__group">
                 <label class="auth-form__label" for="question">СУТЬ ВОПРОСА</label>
-                <textarea class="auth-form__textarea<?=$errors['question'] ? ' auth-form__input-error' : ''?>"
+                <textarea class="auth-form__textarea<?=isset($errors['question']) ? ' auth-form__input-error' : ''?>"
                   name="question" id="question" rows="8" cols="55" required><?=$question?></textarea>
-                <?=$errors['question']?>
+                <?=isset($errors['question']) ? $errors['question'] : ''?>
               </div>
             </div>
             <div class="auth-form__extra">
               <div class="auth-form__checkbox-wrapper">
-                <input class="auth-form__checkbox<?=$errors['contract_is_read'] ? ' auth-form__input-error' : ''?>"
+                <input class="auth-form__checkbox<?=isset($errors['contract_is_read']) ? ' auth-form__input-error' : ''?>"
                   type="checkbox" name="contract_is_read" id="contract_is_read" required
                   <?=$contractIsRead ? 'checked' : ''?>>
                 <label class="auth-form__label-dim" for="contract_is_read">С контрактом ознакомлен</label>
               </div>
-              <?=$errors['contract_is_read']?>
+              <?=isset($errors['contract_is_read']) ? $errors['contract_is_read'] : ''?>
             </div>
           </div>
           <div class="auth-form__bottom">

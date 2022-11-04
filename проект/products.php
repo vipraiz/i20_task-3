@@ -53,14 +53,14 @@ if (!isset($_GET['cat_id'])) {
   <main>
     <div class="layout">
 <?php
-if ($id) {
+if (isset($id)) {
     echo '<a class="regular-link" href="products.php">Назад</a>';
 }
 ?>
       <section class="products">
         <h1 class="products__title"><?=$title?></h1>
 <?php
-if (!$id) {
+if (!isset($id)) {
     echo '<div class="categories">';
     foreach ($categories as $category) {
         ?>
@@ -110,7 +110,7 @@ if (!$totalActiveProducts) {
 }
     echo '</div>';
 }
-if ($id && $totalPages > 1) {
+if (isset($id) && $totalPages > 1) {
     ?>
         <nav class="pagination">
           <a class="<?=$page == 1 ? ' disabled-link' : 'regular-link'?>"
